@@ -3,7 +3,7 @@ import { Alert, SafeAreaView, TouchableOpacity } from "react-native";
 import { Box, Center, Input, Stack, Button as NBButton, Image, Icon, Text } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Button from "../components/Button/Button";
-
+import auth from "@react-native-firebase/auth";
 
 const Register = ({ navigation }) => {
   const insets = useSafeAreaInsets();
@@ -12,7 +12,7 @@ const Register = ({ navigation }) => {
   const [UserEmail, setUserEmail] = useState("");
   const [UserPassword, setUserPassword] = useState("");
 
- /* const __doSignUp = () => {
+  const __doSignUp = () => {
     if (!UserEmail) {
       Alert.alert("Error", "Email required *");
       return;
@@ -40,8 +40,19 @@ const Register = ({ navigation }) => {
       }
     } catch (e) {
       console.error(e.message);
+      Alert.alert(
+        "Hata",
+        e.message,
+        [
+          {
+            text: "Tamam",
+
+            onPress: () => navigation.navigate("Login")
+          },
+        ],
+      );
     }
-  };*/
+  };
   return (
     <SafeAreaView style={{ flex: 1, marginTop: insets.top, backgroundColor: "white" }}>
       <Box alignItems="center">
@@ -106,18 +117,21 @@ const Register = ({ navigation }) => {
 
       </Stack>
       <Center mx={6} space={4} alignItems="center">
-        <Button mt={10} blue title={"Kayıt Ol"}
-         />
-        <TouchableOpacity
 
-          onPress={() => {
-            navigation.navigate("Login");
-          }}
-        >
-          <Text mt={5}>Giriş yapmak için <Text bold>tıklayınız.</Text></Text>
-        </TouchableOpacity>
 
-      </Center>
+          <Button mt={10} blue title={"Kayıt Ol"} onPress={() => __doSignUp()}
+          />
+          <TouchableOpacity
+
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
+          >
+
+            <Text mt={5}>Giriş yapmak için <Text bold>tıklayınız.</Text></Text>
+          </TouchableOpacity>
+
+        </Center>
 
     </SafeAreaView>
   );
