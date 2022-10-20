@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
       );
 
       if (response) {
-        console.log(response);
+        console.log("res",response);
         navigation.navigate("Home");
         Alert.alert("Successful Login", "Welcome ");
       }
